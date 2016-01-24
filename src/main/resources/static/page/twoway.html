@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../build/js/vue.min.js"></script>
+</head>
+<body>
+<div id="example">
+    <p>{{ message }}</p>
+    <input type='text' v-model="message | twoWays">
+</div>
+
+<script type="text/javascript">
+
+    Vue.filter('twoWays', {
+        read: function (val) {
+            return 'read ' + val;
+        },
+        write: function (newVal, oldVal) {
+            console.log(newVal, oldVal);
+            return oldVal + ' write';
+        }
+    });
+
+    var demo = new Vue({
+        el: '#example',
+        data: {
+            message: 'hello'
+        }
+    });
+</script>
+</body>
+</html>
